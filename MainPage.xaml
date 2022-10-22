@@ -1,41 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ExpenseTrackerMobile.MainPage">
+			 xmlns:viewmodel="clr-namespace:ExpenseTrackerMobile.ViewModels"
+			 xmlns:model="clr-namespace:ExpenseTrackerMobile.Models.Login"
+			 x:DataType="viewmodel:MainPageViewModel"
+             x:Class="ExpenseTrackerMobile.MainPage"
+			 Title="{Binding Title}">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+	<ScrollView>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+		<VerticalStackLayout
+			Margin="50"
+			Padding="12"
+            VerticalOptions="Start"
+			HorizontalOptions="Center">
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+			<Label Text="Sign In"
+				   FontSize="32"
+				   VerticalOptions="Center"
+				   HorizontalOptions="Center"/>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+			<Entry MinimumWidthRequest="300" Text="{Binding Model.Email}" MaxLength="30" Placeholder="Username" Margin="19"/>
+			<Entry MinimumWidthRequest="300" Text="{Binding Model.Password}" MaxLength="30" Placeholder="Password" IsPassword="true" Margin="19"/>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+			<Button x:Name="Login" Text="Sign In"/>
+			<Frame BorderColor="Transparent" WidthRequest="200" Margin="20">
+				<Frame.GestureRecognizers >
+					<TapGestureRecognizer NumberOfTapsRequired="1" 
+										  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToRegisterCommand}"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+				</Frame.GestureRecognizers>
+				<Label Text="Don't have an account ?"/>
+
+			</Frame>
+		
+		</VerticalStackLayout>
+	</ScrollView>
 
 </ContentPage>
